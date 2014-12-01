@@ -1,8 +1,10 @@
 name             'cronmon'
-maintainer       'YOUR_NAME'
-maintainer_email 'YOUR_EMAIL'
+maintainer       'Scot Spinner'
+maintainer_email 'scot.spinner@gmail.com'
 license          'All rights reserved'
 description      'Installs/Configures cronmon'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.1.0'
 
+depends "rbenv"
+depends "runit"
