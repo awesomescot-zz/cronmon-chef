@@ -8,6 +8,12 @@ user "cronmon" do
   shell "/bin/false"
 end
 
+directory "/opt/cronmon" do
+  user "cronmon"
+  group "cronmon"
+  recursive true
+end
+
 rbenv_ruby "2.0.0-p247" do
     global :true
 end
