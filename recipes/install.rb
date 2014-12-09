@@ -43,3 +43,4 @@ package "redis-server"
 
 runit_service "cronmon_runit"
 
+directory "/var/log/cronmon"
