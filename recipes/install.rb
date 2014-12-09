@@ -41,7 +41,5 @@ end
 
 package "redis-server"
 
-# unpack github repo into /opt/cronmon
-# mv wrapper script to /usr/local/bin/
-# 
-# install correct gems
+runit_service "cronmon_runit"
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+export PATH=/opt/rbenv/bin:${PATH}
+exec chpst -u cronmon /opt/cronmon/cronmon_run 2>&1
+
