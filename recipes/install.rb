@@ -29,6 +29,7 @@ git "/opt/cronmon" do
   group "cronmon"
   action :sync
   notifies :run, "rbenv_execute[cronmon_exec_bundle]" ,  :immediately
+  notifies :run, "execute[copy_cron_wrapper]", :immediately
 end
 
 rbenv_execute "cronmon_exec_bundle" do
@@ -39,8 +40,18 @@ rbenv_execute "cronmon_exec_bundle" do
   cwd "/opt/cronmon"
 end
 
+execute "copy_cron_wrapper" do
+  command "cp ./cron_wrapper /usr/local/bin/"
+  cwd "/opt/cronmon"
+end
+
 package "redis-server"
 
 runit_service "cronmon_runit"
 
 directory "/var/log/cronmon"
+
+directory "/opt/cronmon/vendor" do
+  mode "755"
+  recursive true
+end
