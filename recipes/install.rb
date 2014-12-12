@@ -38,11 +38,18 @@ rbenv_execute "cronmon_exec_bundle" do
   user "cronmon"
   group "cronmon"
   cwd "/opt/cronmon"
+  action :nothing
+  notifies :run, "execute[chmod_/opt/cronmon/vendor]", :immediately
 end
 
 execute "copy_cron_wrapper" do
   command "cp ./cron_wrapper /usr/local/bin/"
   cwd "/opt/cronmon"
+  action :nothing
+end
+execute "chmod_/opt/cronmon/vendor" do
+  command "chmod -R 755 /opt/cronmon/vendor"
+  action :nothing
 end
 
 package "redis-server"
@@ -51,7 +58,3 @@ runit_service "cronmon_runit"
 
 directory "/var/log/cronmon"
 
-directory "/opt/cronmon/vendor" do
-  mode "755"
-  recursive true
-end
