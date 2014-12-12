@@ -30,6 +30,7 @@ git "/opt/cronmon" do
   action :sync
   notifies :run, "rbenv_execute[cronmon_exec_bundle]" ,  :immediately
   notifies :run, "execute[copy_cron_wrapper]", :immediately
+  notifies :run, "execute[chmod_/opt/cronmon/vendor]", :immediately
 end
 
 rbenv_execute "cronmon_exec_bundle" do
@@ -39,7 +40,6 @@ rbenv_execute "cronmon_exec_bundle" do
   group "cronmon"
   cwd "/opt/cronmon"
   action :nothing
-  notifies :run, "execute[chmod_/opt/cronmon/vendor]", :immediately
 end
 
 execute "copy_cron_wrapper" do
